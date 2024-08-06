@@ -1,42 +1,49 @@
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			characters: [],
+			planets: [],
+			vehicles: [],
+			favorites: []
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
+			fetchCharacters: async () => {
+				try {
+					const res = await fetch('https://www.swapi.tech/api/people');
+					const data = await res.json();
+					setStore({ characters: data.results });
+				} catch (error) {
+					console.error('Error fetching characters:', error);
+				}
 			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
+			fetchPlanets: async () => {
+				// Similar a fetchCharacters, pero con 'https://www.swapi.tech/api/planets'
+				try {
+					const res = await fetch('https://www.swapi.tech/planets');
+					const data = await res.json();
+					setStore({ characters: data.results });
+				} catch (error) {
+					console.error('Error fetching characters:', error);
+				}
 			},
-			changeColor: (index, color) => {
-				//get the store
+			fetchVehicles: async () => {
+				// Similar a fetchCharacters, pero con 'https://www.swapi.tech/api/vehicles'
+				try {
+					const res = await fetch('https://www.swapi.tech/api/vehicles');
+					const data = await res.json();
+					setStore({ characters: data.results });
+				} catch (error) {
+					console.error('Error fetching characters:', error);
+				}
+			},
+			addToFavorites: (item) => {
 				const store = getStore();
-
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
+				setStore({ favorites: [...store.favorites, item] });
+			},
+			removeFromFavorites: (item) => {
+				const store = getStore();
+				setStore({ favorites: store.favorites.filter(fav => fav.uid !== item.uid) });
 			}
 		}
 	};
