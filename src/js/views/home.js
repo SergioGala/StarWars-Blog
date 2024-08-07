@@ -1,37 +1,26 @@
-import React, { useEffect, useContext } from 'react';
-import { Context } from '../store/appContext';
-import { Card } from '../component/Card';
+import React from 'react';
+import { useNavigate } from 'react-router';
+import "../../styles/home.css";
+import backgroundImg from '../../img/1366_2000.jpeg'; 
 
-export const Home = () => {
-	const { store, actions } = useContext(Context);
-	
-	useEffect(() => {
-		actions.fetchCharacters();
-		actions.fetchPlanets();
-		actions.fetchVehicles();
-	}, []);
-	
-	return (
-		<div className="container">
-			<h2>Characters</h2>
-			<div className="d-flex overflow-auto">
-				{store.characters.map((char) => (
-					<Card key={char.uid} item={char} type="characters" />
-				))}
-			</div>
-			{/* Repite para planets y vehicles */}
-			<h2>Planets</h2>
-			<div className="d-flex overflow-auto">
-				{store.characters.map((char) => (
-					<Card key={char.uid} item={char} type="planets" />
-				))}
-			</div>
-			<h2>Vehicles</h2>
-			<div className="d-flex overflow-auto">
-				{store.characters.map((char) => (
-					<Card key={char.uid} item={char} type="vehicles" />
-				))}
-			</div>
-		</div>
-	);
+const Home = () => {
+  const navigate = useNavigate();
+
+  return (
+    <div className="text-center mt-5">
+      <div
+        className="my-5 bg"
+        style={{
+          backgroundImage: `url(${backgroundImg})`, 
+          backgroundSize: 'cover', // Ajusta el tamaño de la imagen para cubrir el div
+          backgroundPosition: 'center', // Centra la imagen en el div
+          backgroundRepeat: 'no-repeat', // Evita que la imagen se repita
+          height: '800px', 
+        }}
+      >
+      </div>
+    </div>
+  );
 };
+
+export default Home;

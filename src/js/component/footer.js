@@ -1,10 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 
 export const Footer = () => (
-	<footer className="footer mt-auto py-3 text-center">
-		<p>
-			Made with <i className="fa fa-heart text-danger" /> by{" "}
-			<a href="http://www.4geeksacademy.com">4Geeks Academy</a>
-		</p>
-	</footer>
+  <footer className="footer mt-auto py-3 text-center fs-5">
+    <p className="star-wars-footer">
+      The force will accompany you as it accompanied{" "}
+      <a href="http://github.com/SergioGala" className="star-wars-link">SergioGala</a>
+	  creating this wiki
+    </p>
+  </footer>
 );
